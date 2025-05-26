@@ -2,6 +2,7 @@ import { getSvgRegex } from './getSvgRegex';
 import { LEFT, TOP } from '../constants';
 
 export const reNum = String.raw`(?:[-+]?(?:\d*\.\d+|\d+\.?)(?:[eE][-+]?\d+)?)`;
+export const numSeparator = String.raw`(?:,\s*|\s+)`;
 
 export const svgNS = 'http://www.w3.org/2000/svg';
 
@@ -81,17 +82,13 @@ export const svgValidParentsRegEx = getSvgRegex(svgValidParents);
 // matches, e.g.: +14.56e-12, etc.
 export const reViewBoxAttrValue = new RegExp(
   '^' +
-    '\\s*(' +
-    reNum +
-    '+)\\s*,?' +
-    '\\s*(' +
-    reNum +
-    '+)\\s*,?' +
-    '\\s*(' +
-    reNum +
-    '+)\\s*,?' +
-    '\\s*(' +
-    reNum +
-    '+)\\s*' +
-    '$',
+  '\\s*(' + reNum + ')' +
+  numSeparator +
+  '(' + reNum + ')' +
+  numSeparator +
+  '(' + reNum + ')' +
+  numSeparator +
+  '(' + reNum + ')' +
+  '\\s*' +
+  '$'
 );
